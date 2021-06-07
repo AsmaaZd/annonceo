@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+	{% block stylesheets %}
+
+	{% endblock %}
+{% block title %}
+	{{ parent() }}| Profil
+{% endblock %}
+
+{% block titreH1 %}Profil
+{% endblock %}
+{% block body %}
+{# <div class="col-md-6 mx-auto">
+<div class="col-md-10 mx-auto">
+   <p> Nom: {{ app.user.nom }} </p> 
+</div>
+<div class="col-md-10 mx-auto">
+    <p> Prenom: {{ app.user.prenom }}</p>
+</div>
+<div class="col-md-10 mx-auto">
+    <p> Email: {{ app.user.email }}</p>
+</div>
+
+<div class="row justify-content-between">
+    <a class="col-md-5 btn btn-info" href="">Modifier profil</a>
+    <a class="col-md-5 btn btn-danger" href="">Modifier le mot de passe</a>
+</div>
+</div> #}
+
+{% block javascripts %}
+
+ {% endblock %}
+{% endblock %}
+

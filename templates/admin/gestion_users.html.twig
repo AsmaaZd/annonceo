@@ -1,0 +1,228 @@
+{% extends 'admin/dashboard.html.twig' %}
+{% block stylesheets %}{% endblock %}
+
+
+{% block body %}
+	<div class="row mt">
+		<div class="col-md-12">
+			<div class="content-panel">
+				{% if users %}
+					<table class="table table-striped table-advance table-hover">
+						<h4>
+							<i class="fa fa-angle-right"></i>
+							Gestion des membres</h4>
+						<hr>
+						<thead>
+							<tr>
+								<th style="min-width:100px">
+									<i class="fa fa-bullhorn"></i>
+									id Membre</th>
+								<th style="min-width:100px" class="hidden-phone">
+									<i class="fa fa-question-circle"></i>
+									Pseudo</th>
+								{# <th class="hidden-phone"><i class="fa fa-question-circle"></i> Descrition longue</th> #}
+								<th style="min-width:100px">
+									<i class="fa fa-user"></i>
+									Nom</th>
+								<th style="min-width:100px">
+									<i class="fa fa-user"></i>
+									Prenom</th>
+								<th style="min-width:100px">
+									<i class="fa fa-envelope"></i>
+									Email</th>
+								<th style="min-width:100px">
+									<i class="fa fa-phone"></i>
+									Télephone</th>
+								<th style="min-width:100px">
+									<i class="fa fa-female"></i>|<i class="fa fa-male"></i>
+									Civilité</th>
+								<th style="min-width:100px">
+									<i class="fa fa-bookmark"></i>
+									Satatus</th>
+								<th style="min-width:100px">
+									<i class="fa fa-calendar"></i>
+									Date d'enregistrement</th>
+								<th style="min-width:100px">
+									<i class=" fa fa-edit"></i>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for user in users %}
+								<tr>
+									<td>
+										<a href="basic_table.html#">{{ user.id }}</a>
+									</td>
+									<td class="hidden-phone">{{ user.pseudo }}</td>
+									<td>{{ user.nom }}</td>
+									<td>{{ user.prenom}}</td>
+									<td>{{user.email}}</td>
+									<td>{{ user.telephone}}</td>
+									<td>{{ user.civilite}}</td>
+									
+									<td>{{ user.roles[0] }}</td>
+									<td>{{ user.dateEnregistrement | date()}}</td>
+									<td>
+										<a href="{{ path('fiche_user', {'id' : user.id }) }}" class="btn btn-primary btn-xs">
+											<i class="fa fa-search"></i>
+										</a>
+										<a href="{{ path('user_supprimer', {'id' : user.id }) }}" class="btn btn-danger btn-xs">
+											<i class="fa fa-trash-o "></i>
+										</a>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+
+
+				{% else %}
+					<h2>Pas de membres</h2>
+				{% endif %}
+
+			</div>
+			<!-- /content-panel -->
+		</div>
+		<!-- /col-md-12 -->
+	</div>
+
+{% if user  %}
+	<div class="row mt">
+		<div class="col-lg-12">
+			<div class="form-panel">
+				<h4 class="mb">
+					<i class="fa fa-angle-right"></i>
+					Modifier le role de l'utilisateur</h4>
+				{{ form_start(formUser) }}
+				<div class="form-horizontal style-form" method="get">
+					<div class="form-group">
+						<label class="col-sm-2 col-sm-2 control-label">{{ form_label(formUser.pseudo) }}</label>
+						<div class="col-sm-10">
+							{{ form_widget(formUser.pseudo) }}
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 col-sm-2 control-label">{{ form_label(formUser.nom) }}</label>
+						<div class="col-sm-10">
+							{{ form_widget(formUser.nom) }}
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 col-sm-2 control-label">{{ form_label(formUser.prenom) }}</label>
+						<div class="col-sm-10">
+							{{ form_widget(formUser.prenom) }}
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 col-sm-2 control-label">{{ form_label(formUser.email) }}</label>
+						<div class="col-sm-10">
+							{{ form_widget(formUser.email) }}
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 col-sm-2 control-label">{{ form_label(formUser.telephone) }}</label>
+						<div class="col-sm-10">
+							{{ form_widget(formUser.telephone) }}
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 col-sm-2 control-label">{{ form_label(formUser.civilite) }}</label>
+						<div class="col-sm-10">
+							{{ form_widget(formUser.civilite) }}
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 col-sm-2 control-label">{{ form_label(formUser.roleUser) }}</label>
+						<div class="col-sm-10">
+							{{ form_widget(formUser.roleUser) }}
+						</div>
+					</div>
+				</div>
+				{# {{ form_widget(formUser.cp, { 'attr': {'class': 'hidden-row'} }) }} #}
+                
+                <a href="{{ path('gestion_users') }}"><button  class="btn btn-theme start">
+					<i class="glyphicon glyphicon-upload"></i>
+					<span>Retourner</span>
+				</button></a>
+                
+				
+				{{ form_end(formUser) }}
+			</div>
+		</div>
+		<!-- col-lg-12-->
+	</div>
+{% else %}
+
+	<div class="row mt">
+		<div class="col-lg-12">
+			<div class="form-panel">
+				<h4 class="mb">
+					<i class="fa fa-angle-right"></i>
+					Ajouter un nouveau utilisateur</h4>
+				{{ form_start(formUser) }}
+				<div class="form-horizontal style-form" method="get">
+					<div class="form-group">
+						<label class="col-sm-2 col-sm-2 control-label">{{ form_label(formUser.pseudo) }}</label>
+						<div class="col-sm-10">
+							{{ form_widget(formUser.pseudo) }}
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 col-sm-2 control-label">{{ form_label(formUser.password) }}</label>
+						<div class="col-sm-10">
+							{{ form_widget(formUser.password) }}
+						</div>
+					</div>
+					{# <div class="form-group">
+						<label class="col-sm-2 col-sm-2 control-label">{{ form_label(formUser.nom) }}</label>
+						<div class="col-sm-10">
+							{{ form_widget(formUser.nom) }}
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 col-sm-2 control-label">{{ form_label(formUser.prenom) }}</label>
+						<div class="col-sm-10">
+							{{ form_widget(formUser.prenom) }}
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 col-sm-2 control-label">{{ form_label(formUser.email) }}</label>
+						<div class="col-sm-10">
+							{{ form_widget(formUser.email) }}
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 col-sm-2 control-label">{{ form_label(formUser.telephone) }}</label>
+						<div class="col-sm-10">
+							{{ form_widget(formUser.telephone) }}
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 col-sm-2 control-label">{{ form_label(formUser.civilite) }}</label>
+						<div class="col-sm-10">
+							{{ form_widget(formUser.civilite) }}
+						</div>
+					</div> #}
+					<div class="form-group">
+						<label class="col-sm-2 col-sm-2 control-label">{{ form_label(formUser.roleUser) }}</label>
+						<div class="col-sm-10">
+							{{ form_widget(formUser.roleUser) }}
+						</div>
+					</div>
+				</div>
+				{# {{ form_widget(formUser.cp, { 'attr': {'class': 'hidden-row'} }) }} #}
+                
+                <button type="submit" class="btn btn-theme start">
+					<i class="glyphicon glyphicon-upload"></i>
+					<span>Ajouter</span>
+				</button>
+                
+				
+				{{ form_end(formUser) }}
+			</div>
+		</div>
+		<!-- col-lg-12-->
+	</div>
+                
+                {% endif %}
+{% endblock %}
+{% block javascripts %}{% endblock %}

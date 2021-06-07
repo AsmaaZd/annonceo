@@ -1,0 +1,66 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block body %}
+<div class="row mt">
+          <div class="col-md-12">
+            <div class="content-panel">
+            {% if annonces %}
+              <table class="table table-striped table-advance table-hover">
+                <h4><i class="fa fa-angle-right"></i> Gestion des annonces</h4>
+                <hr>
+                <thead>
+                  <tr>
+                    <th style="min-width:100px"><i class="fa fa-bullhorn" ></i> Titre</th>
+                    <th style="min-width:100px" class="hidden-phone"><i class="fa fa-question-circle"></i> Descrition</th>
+                    {# <th class="hidden-phone"><i class="fa fa-question-circle"></i> Descrition longue</th> #}
+                    <th style="min-width:100px"><i class="fa fa-money"></i> Prix</th>
+                    <th style="min-width:100px"><i class="fa fa-picture-o"></i> Photo</th>
+                    <th style="min-width:100px"><i class="fa fa-globe"></i> Pays</th>
+                    <th style="min-width:100px"><i class="fa fa-flag"></i> Ville</th>
+                    <th style="min-width:100px"><i class="fa fa-map-marker"></i> Adresse</th>
+                    <th style="min-width:100px"><i class="fa fa-bookmark"></i> CP</th>
+                    <th style="min-width:100px"><i class="fa fa-user"></i> Membre</th>
+                    <th style="min-width:100px"><i class="fa fa-folder-open"></i> Caregorie</th>
+                    <th style="min-width:100px"><i class="fa fa-calendar"></i> Date</th>
+                    {# <th style="min-width:100px"><i class=" fa fa-edit"></i> Status</th> #}
+                    <th style="min-width:100px"><i class=" fa fa-edit"></i>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for annonce in annonces %}
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#">{{ annonce.titre }}</a>
+                    </td>
+                    <td class="hidden-phone">{{ annonce.descriptionCourte }}</td>
+                    {# <td class="hidden-phone">{{ annonce.descriptionLongue }}</td> #}
+                    <td>{{ annonce.prix}}€</td>
+                    <td ><img src="{{ asset('images/Upload/' ~ annonce.photos[0].nom) }}" alt="{{ annonce.photos[0].nom }}" style='width:80px'></td>
+                    <td>France</td>
+                    <td>{{ annonce.ville}}</td>
+                    <td>{{ annonce.adresse}}</td>
+                    <td>{{ annonce.cp}}</td>
+                    <td>{{ annonce.user.prenom}}</td>
+                    <td>{{ annonce.categorie.titre}}</td>
+                    <td>{{ annonce.dateEnregistrement | date()}}</td>
+                    {# <td><span class="label label-info label-mini">Due</span></td> #}
+                    <td>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                      <a href="{{ path('modifier_annonce', {'id' : annonce.id }) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </td>
+                  </tr>
+                {% endfor %}
+                
+                </tbody>
+              </table>
+            {% else %}
+            <h2>Pas d'annonces</h2>
+            {% endif %}
+
+            </div>
+            <!-- /content-panel -->
+          </div>
+          <!-- /col-md-12 -->
+        </div>
+{% endblock %}

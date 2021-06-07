@@ -1,0 +1,78 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+
+{% block body %}
+	<section
+		class="wrapper site-min-height">
+		<!-- page start-->
+		<div class="chat-room mt">
+			<aside class="mid-side">
+				<div class="chat-room-head">
+					<h3>Annonce n°:
+						{{ annonce.id }}</h3>
+					<form action="#" class="pull-right position">
+						<input type="text" placeholder="Recherche" class="form-control search-btn ">
+					</form>
+				</div>
+				<div class="group-rom">
+					<div class="first-part odd">Titre de l'annonce</div>
+					<div class="second-part">{{ annonce.titre }}</div>
+				</div>
+				<div class="group-rom">
+					<div class="first-part odd">Proprietaire de l'annonce</div>
+					<div class="second-part">{{ annonce.user.nom}}
+						{{ annonce.user.prenom}}</div>
+				</div>
+				<div class="group-rom">
+					<div class="first-part odd">Images de l'annonce</div>
+					<div class="second-part">
+						{% if annonce.photos %}
+							{% for photo in annonce.photos %}
+                                <img src="{{ asset('images/Upload/' ~ photo.nom) }}" alt="{{photo.nom}}" style="height:120px">
+                            {% endfor %}
+						{% endif %}
+					</div>
+				</div>
+				<div class="group-rom">
+					<div class="first-part odd">Prix</div>
+					<div class="second-part">{{ annonce.prix }}€</div>
+				</div>
+				<div class="group-rom">
+					<div class="first-part odd">Déscription courte</div>
+					<div class="second-part">{{ annonce.descriptionCourte }}</div>
+				</div>
+                <div class="group-rom">
+					<div class="first-part odd">Déscription longue</div>
+					<div class="second-part">{{ annonce.descriptionLongue }}</div>
+				</div>
+				<div class="group-rom">
+					<div class="first-part odd">Adresse</div>
+					<div class="second-part">{{ annonce.adresse }} <br>{{ annonce.cp}} {{ annonce.ville }}</div>
+				</div>
+               
+				<a href="{{ path('gestion_annances') }}" class="btn btn-theme">Retourner</a>
+			</aside>
+            
+			<aside class="right-side">
+				<div class="user-head">
+					<h4 class="pull-left">Autres annonces du meme membre:</h4>
+					
+				</div>
+				<div class="invite-row">
+					<a href="#" class="btn btn-theme04 pull-right">+ Voir</a>
+				</div>
+				<ul class="chat-available-user">
+					<li>
+						<a href="chat_room.html">
+							<img class="img-circle" src="" width="32">
+							
+							<span class="text-muted"></span>
+						</a>
+					</li>
+					
+				</ul>
+			</aside>
+		</div>
+		<!-- page end-->
+	</section>
+{% endblock %}

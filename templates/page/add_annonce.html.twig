@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}| Acceuil
+{% endblock %}
+{% block stylesheets %}
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+	{{ form_start(formAnnonce) }}
+	<main role="main" class="container">
+		<h2>Déposer une annonce</h2>
+
+		<section class="row">
+
+			<article class="col-md-6">
+				<div class="form-group">
+					{{ form_row(formAnnonce.titre)}}
+				</div>
+				<div class="form-group">
+					{{ form_row(formAnnonce.description_courte)}}
+				</div>
+				<div class="form-group">
+					{{ form_row(formAnnonce.description_longue)}}
+				</div>
+				<div class="form-group">
+					{{ form_row(formAnnonce.prix)}}
+				</div>
+				<div class="form-group">
+					{{ form_row(formAnnonce.categorie)}}
+				</div>
+
+				{# <button type="submit" class="btn btn-primary">Submit</button> #}
+
+
+			</article>
+			<article class="col-md-6">
+				<div class="form-group">
+					{# {{ form_row(formAnnonce.photos)}} #}
+                    {{ form_row(formAnnonce.photos,{ 'attr' : { "onChange" : "loadFile(event)" } }) }}
+                    <div class="col-md-12 text-center row" id="parent">
+		</div>
+				</div>
+				<div class="form-group">
+					{{ form_row(formAnnonce.adresse)}}
+				</div>
+				<div class="form-group">
+					{{ form_row(formAnnonce.cp)}}
+				</div>
+				<div class="form-group">
+					{{ form_row(formAnnonce.ville)}}
+				</div>
+				<div
+					class="form-group">{# {{ form_row(formAnnonce.categorie)}} #}
+				</div>
+			</article>
+			<div class=" col-md-12 d-flex justify-content-center">
+
+				<input type="submit" value="Créer" class="btn btn-success mt-3">
+			</div>
+		</section>
+
+	</main>
+
+	{{ form_end(formAnnonce) }}
+{% endblock %}
+{% block javascripts %}
+
+
+	<script>
+
+        var loadFile = function(event){
+
+            var parent = document.getElementById("parent");
+
+            for($i = 0; $i < event.target.files.length; $i++)
+            {
+                parent.innerHTML += "<div class='text-center col'><img src='" + URL.createObjectURL(event.target.files[$i]) + "' style='width:80px'></div>";
+            }
+        }
+
+// $.fn.modal.Constructor.prototype._enforceFocus = function() {};
+// $(document).ready(function() {
+//     $('#mySelect2').select2({
+//         dropdownParent: $('#myModal')
+//     });
+// });
+	</script>
+{% endblock %}

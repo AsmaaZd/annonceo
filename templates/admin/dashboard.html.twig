@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Annonceo|Dashboard
+			{% endblock %}
+		</title>
+   <link href="{{asset('css/perso.css')}}" rel="stylesheet">
+		{% block stylesheets %}
+			{#{{ encore_entry_link_tags('app') }}#}
+		{% endblock %}
+	</head>
+	<body>
+		  <section id="container">
+  
+    <!--header start-->
+    <header class="header black-bg">
+      <div class="sidebar-toggle-box">
+        <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+      </div>
+      <!--logo start-->
+      <a href="index.html" class="logo"><b>Ananc<span>EO</span></b></a>
+      <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+          <li><a class="logout" href="{{ path('logout') }}">Se deconnecter</a></li>
+        </ul>
+      </div>
+    </header>
+    <aside>
+      <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+          <p class="centered"><a href="profile.html"><img src='' class="img-circle" width="80"></a></p>
+          <h5 class="centered">Asmaa ZIADI</h5>
+          <li class="mt">
+            <a class="active" href="{{ path('dashboard') }}">
+              <i class="fa fa-dashboard"></i>
+              <span>Dashboard</span>
+              </a>
+          </li>
+          <li class="sub-menu">
+            <a href="{{ path('gestion_annances') }}">
+              <i class="fa fa-desktop"></i>
+              <span>Gestion des annonces</span>
+              </a>
+          </li>
+          <li class="sub-menu">
+            <a href="{{ path('gestion_categories') }}">
+              <i class="fa fa-cogs"></i>
+              <span>Gestion des catégories</span>
+              </a>
+          </li>
+          <li class="sub-menu">
+            <a href="{{ path('gestion_users') }}">
+              <i class="fa fa-users"></i>
+              <span>Gestion des membres</span>
+              </a>
+          </li>
+          <li class="sub-menu">
+            <a href="{{ path('gestion_commentaire') }}">
+              <i class="fa fa-comments-o"></i>
+              <span>Gestion des commentaires</span>
+              </a>
+           
+          </li>
+          <li class="sub-menu">
+            <a href="{{ path('gestion_note') }}">
+              <i class="fa fa-tasks"></i>
+              <span>Gestion des notes</span>
+              </a>
+          </li>
+        </ul>
+        <!-- sidebar menu end-->
+      </div>
+    </aside>
+    <section id="main-content">
+      <section class="wrapper">
+        <div class="row">
+         {% block body %}{% endblock %}
+          <!-- /col-lg-3 -->
+        </div>
+        <!-- /row -->
+      </section>
+    </section>
+   
+  </section>
+
+</section>
+{% block javascripts %}
+			{#{{ encore_entry_script_tags('app') }}#}
+		{% endblock %}
+		</body>
+	</html>
+	
